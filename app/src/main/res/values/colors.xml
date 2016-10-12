@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimary">#3F51B5</color>
+    <color name="colorPrimaryDark">#303F9F</color>
+    <color name="colorAccent">#FF4081</color>
+
+
+
+
+
+
+
+
+
+    <color name="colorBackground">@color/white</color>
+
+
+    <color name="colorPrimaryButtonNormal">#008BCF</color>
+    <color name="colorPrimaryButtonText">@color/white</color>
+    <color name="colorPrimaryButtonDisabled">#D9DEE3</color>
+    <color name="colorPrimaryButtonDown">#0376AF</color>
+
+    <color name="colorProgressbar">#0088CE</color>
+    <color name="colorProgressbarGradient">#F6F7FB</color>
+
+    <color name="colorDividerLine">#E2E2E2</color>
+
+
+    <color name="white">#FFFFFF</color>
+
+
+    <!-- TODO: edit all colors with this: -->
+
+    <color name="colorTextFieldPlaceholder">#B6C0C9</color>
+    <color name="colorTextFieldPlaceholderOnFocus">#008BCF</color>
+    <color name="colorTextFieldPlaceholderError">#CC3333</color>
+
+    <color name="colorCheckBoxIndicator">#E2E2E2</color>
+
+
+
+
+
+
+
+
+</resources>
