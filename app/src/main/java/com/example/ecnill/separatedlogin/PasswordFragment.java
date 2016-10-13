@@ -15,6 +15,7 @@ import android.widget.EditText;
 public class PasswordFragment extends BaseLoginFragment {
 
     private static String TAG = "LoginFragment";
+    private String PASSWORD = "password";
 
     public PasswordFragment() {
         super(TAG);
@@ -39,10 +40,8 @@ public class PasswordFragment extends BaseLoginFragment {
     protected  View.OnClickListener getButtonListener(Activity activity, View layout) {
         class PasswordFragmentButtonListener extends BaseButtonListener {
 
-            String PASSWORD_PROPERTY = "password";
-
-            protected PasswordFragmentButtonListener(Activity activity, View layout) {
-                super(activity, layout);
+            private PasswordFragmentButtonListener(Activity activity, View layout, String editProperty) {
+                super(activity, layout, editProperty);
             }
 
             @Override
@@ -51,13 +50,8 @@ public class PasswordFragment extends BaseLoginFragment {
             }
 
             @Override
-            protected String getPropertyName() {
-                return PASSWORD_PROPERTY;
-            }
-
-            @Override
-            protected boolean isValidate(String value) {
-                return Utils.validatePassword(value);
+            protected boolean isValid(String value) {
+                return Utils.validate(value, Utils.PASSWORD_PATTERN);
             }
 
             @Override
@@ -75,7 +69,7 @@ public class PasswordFragment extends BaseLoginFragment {
                 return R.string.settings_correct_password;
             }
         }
-        return new PasswordFragmentButtonListener(activity, layout);
+        return new PasswordFragmentButtonListener(activity, layout, PASSWORD);
     }
 
 }

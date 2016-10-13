@@ -15,6 +15,7 @@ import android.widget.EditText;
 public class ServerFragment extends BaseLoginFragment {
 
     private static String TAG = "ServerFragment";
+    private String SERVER = "server";
 
     public ServerFragment() {
         super(TAG);
@@ -38,10 +39,8 @@ public class ServerFragment extends BaseLoginFragment {
     protected View.OnClickListener getButtonListener(Activity activity, View layout) {
         class ServerFragmentButtonListener extends BaseButtonListener {
 
-            String SERVER_PROPERTY = "server";
-
-            protected ServerFragmentButtonListener(Activity activity, View layout) {
-                super(activity, layout);
+            private ServerFragmentButtonListener(Activity activity, View layout, String editProperty) {
+                super(activity, layout, editProperty);
             }
 
             @Override
@@ -50,13 +49,8 @@ public class ServerFragment extends BaseLoginFragment {
             }
 
             @Override
-            protected String getPropertyName() {
-                return SERVER_PROPERTY;
-            }
-
-            @Override
-            protected boolean isValidate(String value) {
-                return Utils.validateServerAddress(value);
+            protected boolean isValid(String value) {
+                return Utils.validate(value, Utils.SERVER_PATTERN);
             }
 
             @Override
@@ -74,7 +68,7 @@ public class ServerFragment extends BaseLoginFragment {
                 return R.string.settings_correct_server_address;
             }
         }
-        return new ServerFragmentButtonListener(activity, layout);
+        return new ServerFragmentButtonListener(activity, layout, SERVER);
     }
 }
 

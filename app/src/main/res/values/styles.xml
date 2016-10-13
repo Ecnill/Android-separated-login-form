@@ -10,6 +10,7 @@
     <style name="AppTheme.MainActivity">
         <item name="windowActionBar">false</item>
         <item name="windowNoTitle">true</item>
+        <item name="android:textViewStyle">@style/textViewStyle</item>
     </style>
 
     <style name="AppTheme.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
@@ -24,6 +25,9 @@
         <item name="colorAccent">@color/colorProgressbar</item>
     </style>
 
-
+    <style name="textViewStyle" parent="android:Widget.TextView">
+        <item name="android:textColor">@color/textColorPrimary</item>
+    </style>
 
 </resources>
+

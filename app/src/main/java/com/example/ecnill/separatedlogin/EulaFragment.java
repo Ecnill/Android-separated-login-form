@@ -25,16 +25,12 @@ public class EulaFragment extends Fragment {
     ProgressBar progress;
     private Handler handler = new Handler();
 
-    public EulaFragment() {
-        // Required empty public constructor
-    }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         Log.e(TAG, "onCreate");
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -85,11 +81,8 @@ public class EulaFragment extends Fragment {
                 layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
             }
         });
-
         return layout;
     }
-
-
 
 }
 

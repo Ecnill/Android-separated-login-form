@@ -15,6 +15,7 @@ import android.widget.EditText;
 public class LoginFragment extends BaseLoginFragment {
 
     private static String TAG = "LoginFragment";
+    private String USERNAME = "username";
 
     public LoginFragment() {
         super(TAG);
@@ -39,10 +40,8 @@ public class LoginFragment extends BaseLoginFragment {
     protected  View.OnClickListener getButtonListener(Activity activity, View layout) {
         class LoginFragmentButtonListener extends BaseButtonListener {
 
-            String USERNAME_PROPERTY = "username";
-
-            protected LoginFragmentButtonListener(Activity activity, View layout) {
-                super(activity, layout);
+            private LoginFragmentButtonListener(Activity activity, View layout, String editProperty) {
+                super(activity, layout, editProperty);
             }
 
             @Override
@@ -51,13 +50,8 @@ public class LoginFragment extends BaseLoginFragment {
             }
 
             @Override
-            protected String getPropertyName() {
-                return USERNAME_PROPERTY;
-            }
-
-            @Override
-            protected boolean isValidate(String value) {
-                return Utils.validateEmail(value);
+            protected boolean isValid(String value) {
+                return Utils.validate(value, Utils.EMAIL_PATTERN);
             }
 
             @Override
@@ -75,7 +69,7 @@ public class LoginFragment extends BaseLoginFragment {
                 return R.string.settings_exist_mail;
             }
         }
-        return new LoginFragmentButtonListener(activity, layout);
+        return new LoginFragmentButtonListener(activity, layout, USERNAME);
     }
 
 }

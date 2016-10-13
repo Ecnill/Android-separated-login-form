@@ -11,6 +11,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ProgressBar;
+import android.widget.TextView;
 
 /**
  * Created by ecnill on 12/10/16.
@@ -18,8 +19,6 @@ import android.widget.ProgressBar;
 
 public class MainProgramFragment extends Fragment{
     private String TAG = "MainProgramFragment";
-    public static final String LOGIN_SETTINGS = "LoginSettings";
-    public static final String EULA = "EULA";
 
     ProgressBar progress;
     private Handler mHandler = new Handler();
@@ -35,6 +34,7 @@ public class MainProgramFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(TAG, "onCreate");
         progress = (ProgressBar) getActivity().findViewById(R.id.progress);
 
     }
@@ -48,27 +48,22 @@ public class MainProgramFragment extends Fragment{
     @Override
     public void onActivityCreated(Bundle savedInstanceState) {
         super.onActivityCreated(savedInstanceState);
-        ((MainActivity) getActivity()).getSupportActionBar().show();    //turn on ActionBar after login fragment
+        MainActivity activity = ((MainActivity) getActivity());
+        activity.getSupportActionBar().show();    // turn on ActionBar after login fragment
 
-        SharedPreferences settings = getActivity().getSharedPreferences(EULA, 0);
-        final boolean eulaOK = settings.getBoolean(EULA, false);
+        SharedPreferences settings = activity.getSharedPreferences(Utils.EULA, 0);
+        final boolean eulaOK = settings.getBoolean(Utils.EULA, false);
 
         if (!eulaOK) {
             FragmentTransaction ft = getFragmentManager().beginTransaction();
             ft.replace(R.id.content_main, new EulaFragment());
             ft.commit();
         } else {
-            settings = getActivity().getSharedPreferences(LOGIN_SETTINGS, 0);
-            final String username = settings.getString("username", null);
-            final String password = settings.getString("password", null);
-            final String server = settings.getString("server", null);
+            TextView textView = (TextView)activity.findViewById(R.id.main_text);
+            textView.setText(getResources().getString(R.string.hello_world));
         }
         setHasOptionsMenu(true);
     }
-
-
-
-
 
 
 

@@ -12,12 +12,11 @@
         <item name="windowNoTitle">true</item>
         <item name="android:windowDrawsSystemBarBackgrounds">true</item>
         <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:textViewStyle">@style/textViewStyle</item>
     </style>
 
     <style name="primaryButtonStyle" parent="Widget.AppCompat.Button.Colored">
-        <item name="android:colorButtonNormal">@color/colorPrimaryButtonNormal</item>
-        <item name="colorAccent">@color/colorPrimaryButtonDisabled</item>
-        <item name="android:colorControlHighlight">@color/colorPrimaryButtonDown</item>
+
         <item name="android:textColor">@color/colorPrimaryButtonText</item>
     </style>
 

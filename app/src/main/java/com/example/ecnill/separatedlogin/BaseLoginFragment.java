@@ -5,7 +5,6 @@ import android.app.Fragment;
 import android.app.FragmentTransaction;
 import android.content.Context;
 import android.content.SharedPreferences;
-import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.support.design.widget.TextInputLayout;
@@ -64,15 +63,16 @@ public abstract class BaseLoginFragment extends Fragment {
         final Activity activity;
         final View layout;
         final Handler handler = new Handler();
+        final String editProperty;
 
-        protected BaseButtonListener(Activity activity, View layout) {
+        protected BaseButtonListener(Activity activity, View layout, String editProperty) {
+            this.editProperty = editProperty;
             this.activity = activity;
             this.layout = layout;
         }
 
         protected abstract Fragment getNextFragment();
-        protected abstract String getPropertyName();
-        protected abstract boolean isValidate(String value);
+        protected abstract boolean isValid(String value);
         protected abstract int getValidationErrorMessageID();
         protected abstract boolean isCorrect(String value);
         protected abstract int getErrorCorrectMessageID();
@@ -84,7 +84,7 @@ public abstract class BaseLoginFragment extends Fragment {
                 public void run() {
                     final TextInputLayout fieldWrapper = (TextInputLayout) activity.findViewById(R.id.input_layout_login_form);
                     final String text = fieldWrapper.getEditText().getText().toString();
-                    if (!isValidate(text)) {
+                    if (!isValid(text)) {
                         fieldWrapper.setError(activity.getString(getValidationErrorMessageID()));
                         return;
                     }
@@ -95,7 +95,7 @@ public abstract class BaseLoginFragment extends Fragment {
                     fieldWrapper.setErrorEnabled(false);
                     SharedPreferences settings = activity.getSharedPreferences(Utils.LOGIN_SETTINGS, 0);
                     SharedPreferences.Editor editor = settings.edit();
-                    editor.putString(getPropertyName(), ((EditText) activity.findViewById(R.id.edit_text_login_form)).getText().toString());
+                    editor.putString(editProperty, ((EditText) activity.findViewById(R.id.edit_text_login_form)).getText().toString());
                     editor.apply();
 
                     InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
