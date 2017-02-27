@@ -1,12 +1,15 @@
-package com.example.ecnill.separatedlogin;
+package com.example.ecnill.separatedlogin.Fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.ecnill.separatedlogin.R;
+import com.example.ecnill.separatedlogin.Utils.Utils;
 
 /**
  * Created by ecnill on 12/10/16.
@@ -20,7 +23,6 @@ public class LoginFragment extends BaseLoginFragment {
     public LoginFragment() {
         super(TAG);
     }
-
 
     @Override
     protected void setInputFormProperties(View view) {
@@ -69,7 +71,9 @@ public class LoginFragment extends BaseLoginFragment {
                 return R.string.settings_exist_mail;
             }
         }
+
         return new LoginFragmentButtonListener(activity, layout, USERNAME);
     }
+
 
 }

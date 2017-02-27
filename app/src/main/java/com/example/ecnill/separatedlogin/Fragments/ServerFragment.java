@@ -1,12 +1,15 @@
-package com.example.ecnill.separatedlogin;
+package com.example.ecnill.separatedlogin.Fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.design.widget.TextInputLayout;
 import android.text.InputType;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.ecnill.separatedlogin.R;
+import com.example.ecnill.separatedlogin.Utils.Utils;
 
 /**
  * Created by ecnill on 12/10/16.
@@ -14,7 +17,7 @@ import android.widget.EditText;
 
 public class ServerFragment extends BaseLoginFragment {
 
-    private static String TAG = "ServerFragment";
+    private static String TAG = ServerFragment.class.getSimpleName();
     private String SERVER = "server";
 
     public ServerFragment() {
@@ -45,7 +48,7 @@ public class ServerFragment extends BaseLoginFragment {
 
             @Override
             protected Fragment getNextFragment() {
-                return new MainProgramFragment();
+                return getFragmentManager().findFragmentByTag(MainProgramFragment.class.getSimpleName());
             }
 
             @Override
@@ -68,7 +71,9 @@ public class ServerFragment extends BaseLoginFragment {
                 return R.string.settings_correct_server_address;
             }
         }
+
         return new ServerFragmentButtonListener(activity, layout, SERVER);
     }
-}
 
+
+}

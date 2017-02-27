@@ -1,8 +1,7 @@
-package com.example.ecnill.separatedlogin;
+package com.example.ecnill.separatedlogin.Fragments;
 
 import android.app.Activity;
-import android.app.Fragment;
-import android.app.FragmentTransaction;
+import android.support.v4.app.Fragment;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -16,6 +15,10 @@ import android.view.ViewTreeObserver;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.ecnill.separatedlogin.R;
+import com.example.ecnill.separatedlogin.Utils.FragmentChangeListener;
+import com.example.ecnill.separatedlogin.Utils.Utils;
 
 /**
  * Created by ecnill on 12/10/16.
@@ -101,13 +104,16 @@ public abstract class BaseLoginFragment extends Fragment {
                     InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
                     imm.hideSoftInputFromWindow(layout.getWindowToken(), 0);
 
-                    final FragmentTransaction ft = activity.getFragmentManager().beginTransaction();
-                    ft.replace(R.id.content_main, getNextFragment());
-                    ft.commit();
+                    Fragment fr = getNextFragment();
+                    FragmentChangeListener fc = (FragmentChangeListener)activity;
+                    fc.replaceFragment(((ViewGroup)layout.getParent()).getId(), fr, false);
+
                 }
             }, Utils.BUTTON_ANIMATION_DELAY);
 
         }
+
     }
+
 
 }
