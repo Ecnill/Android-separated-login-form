@@ -1,4 +1,4 @@
-package com.example.ecnill.separatedlogin.Fragments;
+package com.example.ecnill.separatedlogin.fragments;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.Utils.Utils;
+import com.example.ecnill.separatedlogin.utils.Utils;
 
 /**
  * Created by ecnill on 12/10/16.
@@ -57,7 +57,7 @@ public class LoginFragment extends BaseLoginFragment {
             }
 
             @Override
-            protected int getValidationErrorMessageID() {
+            protected int getValidationErrorMessageId() {
                 return R.string.settings_valid_mail;
             }
 
@@ -67,13 +67,12 @@ public class LoginFragment extends BaseLoginFragment {
             }
 
             @Override
-            protected int getErrorCorrectMessageID() {
+            protected int getErrorCorrectMessageId() {
                 return R.string.settings_exist_mail;
             }
         }
 
         return new LoginFragmentButtonListener(activity, layout, USERNAME);
     }
-
 
 }

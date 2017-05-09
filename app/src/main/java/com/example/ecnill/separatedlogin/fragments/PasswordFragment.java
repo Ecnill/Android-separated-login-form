@@ -1,4 +1,4 @@
-package com.example.ecnill.separatedlogin.Fragments;
+package com.example.ecnill.separatedlogin.fragments;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -9,7 +9,9 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.Utils.Utils;
+import com.example.ecnill.separatedlogin.utils.Utils;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by ecnill on 12/10/16.
@@ -28,7 +30,7 @@ public class PasswordFragment extends BaseLoginFragment {
     protected void setInputFormProperties(View view) {
         TextInputLayout textInputLayout = (TextInputLayout)view.findViewById(R.id.input_layout_login_form);
         textInputLayout.setHint(getResources().getString(R.string.settings_password));
-        EditText editText = (EditText) view.findViewById(R.id.edit_text_login_form);
+        EditText editText = ButterKnife.findById(view, R.id.edit_text_login_form);
         editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);
     }
 
@@ -57,7 +59,7 @@ public class PasswordFragment extends BaseLoginFragment {
             }
 
             @Override
-            protected int getValidationErrorMessageID() {
+            protected int getValidationErrorMessageId() {
                 return R.string.settings_valid_password;
             }
 
@@ -67,7 +69,7 @@ public class PasswordFragment extends BaseLoginFragment {
             }
 
             @Override
-            protected int getErrorCorrectMessageID() {
+            protected int getErrorCorrectMessageId() {
                 return R.string.settings_correct_password;
             }
         }
@@ -75,7 +77,4 @@ public class PasswordFragment extends BaseLoginFragment {
         return new PasswordFragmentButtonListener(activity, layout, PASSWORD);
     }
 
-
 }
-
-

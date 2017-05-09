@@ -1,4 +1,4 @@
-package com.example.ecnill.separatedlogin.Utils;
+package com.example.ecnill.separatedlogin.utils;
 
 import android.support.v4.app.Fragment;
 

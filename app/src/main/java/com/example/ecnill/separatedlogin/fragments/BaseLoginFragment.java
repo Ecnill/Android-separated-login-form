@@ -1,4 +1,4 @@
-package com.example.ecnill.separatedlogin.Fragments;
+package com.example.ecnill.separatedlogin.fragments;
 
 import android.app.Activity;
 import android.support.v4.app.Fragment;
@@ -17,16 +17,19 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.Utils.FragmentChangeListener;
-import com.example.ecnill.separatedlogin.Utils.Utils;
+import com.example.ecnill.separatedlogin.utils.FragmentChangeListener;
+import com.example.ecnill.separatedlogin.utils.Utils;
+
+import butterknife.ButterKnife;
 
 /**
  * Created by ecnill on 12/10/16.
  */
 
-public abstract class BaseLoginFragment extends Fragment {
+public abstract class BaseLoginFragment extends Fragment implements ViewTreeObserver.OnGlobalLayoutListener {
 
     private final String TAG;
+    private View layout;
 
     public BaseLoginFragment(String TAG) {
         this.TAG = TAG;
@@ -36,30 +39,24 @@ public abstract class BaseLoginFragment extends Fragment {
     protected abstract void setInputFormProperties(View view);
     protected abstract void setButtonText(View view);
 
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
+    @Override public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate");
+        Log.i(TAG, "onCreate");
     }
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
-        final Activity activity = getActivity();
-        final View layout = inflater.inflate(R.layout.fragment_sign_in, container, false);
-
+    @Override public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        layout = inflater.inflate(R.layout.fragment_sign_in, container, false);
         setInputFormProperties(layout);
-
         ViewTreeObserver vto = layout.getViewTreeObserver();
-        vto.addOnGlobalLayoutListener(new ViewTreeObserver.OnGlobalLayoutListener() {
-            @Override
-            public void onGlobalLayout() {
-                final Button button = (Button) activity.findViewById(R.id.next);
-                setButtonText(layout);
-                button.setOnClickListener(getButtonListener(activity, layout));
-                layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
-            }
-        });
+        vto.addOnGlobalLayoutListener(this);
         return layout;
+    }
+
+    @Override public void onGlobalLayout() {
+        final Button button = ButterKnife.findById(getActivity(), R.id.next);
+        setButtonText(layout);
+        button.setOnClickListener(getButtonListener(getActivity(), layout));
+        layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
     }
 
     protected abstract static class BaseButtonListener implements View.OnClickListener {
@@ -76,23 +73,21 @@ public abstract class BaseLoginFragment extends Fragment {
 
         protected abstract Fragment getNextFragment();
         protected abstract boolean isValid(String value);
-        protected abstract int getValidationErrorMessageID();
+        protected abstract int getValidationErrorMessageId();
         protected abstract boolean isCorrect(String value);
-        protected abstract int getErrorCorrectMessageID();
+        protected abstract int getErrorCorrectMessageId();
 
-        @Override
-        public void onClick(View v) {
+        @Override public void onClick(View v) {
             handler.postDelayed(new Runnable() {
-                @Override
-                public void run() {
-                    final TextInputLayout fieldWrapper = (TextInputLayout) activity.findViewById(R.id.input_layout_login_form);
+                @Override public void run() {
+                    final TextInputLayout fieldWrapper = ButterKnife.findById(activity, R.id.input_layout_login_form);
                     final String text = fieldWrapper.getEditText().getText().toString();
                     if (!isValid(text)) {
-                        fieldWrapper.setError(activity.getString(getValidationErrorMessageID()));
+                        fieldWrapper.setError(activity.getString(getValidationErrorMessageId()));
                         return;
                     }
                     if (!isCorrect(text)) {
-                        fieldWrapper.setError(activity.getString(getErrorCorrectMessageID()));
+                        fieldWrapper.setError(activity.getString(getErrorCorrectMessageId()));
                         return;
                     }
                     fieldWrapper.setErrorEnabled(false);
@@ -107,13 +102,11 @@ public abstract class BaseLoginFragment extends Fragment {
                     Fragment fr = getNextFragment();
                     FragmentChangeListener fc = (FragmentChangeListener)activity;
                     fc.replaceFragment(((ViewGroup)layout.getParent()).getId(), fr, false);
-
                 }
             }, Utils.BUTTON_ANIMATION_DELAY);
 
         }
 
     }
-
 
 }

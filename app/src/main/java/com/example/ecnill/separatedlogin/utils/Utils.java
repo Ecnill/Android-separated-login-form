@@ -1,4 +1,4 @@
-package com.example.ecnill.separatedlogin.Utils;
+package com.example.ecnill.separatedlogin.utils;
 
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;

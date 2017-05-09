@@ -1,4 +1,4 @@
-package com.example.ecnill.separatedlogin.Fragments;
+package com.example.ecnill.separatedlogin.fragments;
 
 import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.example.ecnill.separatedlogin.MainActivity;
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.Utils.Utils;
+import com.example.ecnill.separatedlogin.utils.Utils;
 
 /**
  * Created by ecnill on 12/10/16.
