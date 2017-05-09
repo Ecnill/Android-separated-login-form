@@ -78,33 +78,30 @@ public abstract class BaseLoginFragment extends Fragment implements ViewTreeObse
         protected abstract int getErrorCorrectMessageId();
 
         @Override public void onClick(View v) {
-            handler.postDelayed(new Runnable() {
-                @Override public void run() {
-                    final TextInputLayout fieldWrapper = ButterKnife.findById(activity, R.id.input_layout_login_form);
-                    final String text = fieldWrapper.getEditText().getText().toString();
-                    if (!isValid(text)) {
-                        fieldWrapper.setError(activity.getString(getValidationErrorMessageId()));
-                        return;
-                    }
-                    if (!isCorrect(text)) {
-                        fieldWrapper.setError(activity.getString(getErrorCorrectMessageId()));
-                        return;
-                    }
-                    fieldWrapper.setErrorEnabled(false);
-                    SharedPreferences settings = activity.getSharedPreferences(ValidateUtils.LOGIN_SETTINGS, 0);
-                    SharedPreferences.Editor editor = settings.edit();
-                    editor.putString(editProperty, ((EditText) activity.findViewById(R.id.edit_text_login_form)).getText().toString());
-                    editor.apply();
-
-                    InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
-                    imm.hideSoftInputFromWindow(layout.getWindowToken(), 0);
-
-                    Fragment fr = getNextFragment();
-                    FragmentChangeListener fc = (FragmentChangeListener)activity;
-                    fc.replaceFragment(((ViewGroup)layout.getParent()).getId(), fr, false);
+            handler.postDelayed(() -> {
+                final TextInputLayout fieldWrapper = ButterKnife.findById(activity, R.id.input_layout_login_form);
+                final String text = fieldWrapper.getEditText().getText().toString();
+                if (!isValid(text)) {
+                    fieldWrapper.setError(activity.getString(getValidationErrorMessageId()));
+                    return;
                 }
-            }, ValidateUtils.BUTTON_ANIMATION_DELAY);
+                if (!isCorrect(text)) {
+                    fieldWrapper.setError(activity.getString(getErrorCorrectMessageId()));
+                    return;
+                }
+                fieldWrapper.setErrorEnabled(false);
+                SharedPreferences settings = activity.getSharedPreferences(ValidateUtils.LOGIN_SETTINGS, 0);
+                SharedPreferences.Editor editor = settings.edit();
+                editor.putString(editProperty, ((EditText) activity.findViewById(R.id.edit_text_login_form)).getText().toString());
+                editor.apply();
 
+                InputMethodManager imm = (InputMethodManager) activity.getSystemService(Context.INPUT_METHOD_SERVICE);
+                imm.hideSoftInputFromWindow(layout.getWindowToken(), 0);
+
+                Fragment fr = getNextFragment();
+                FragmentChangeListener fc = (FragmentChangeListener)activity;
+                fc.replaceFragment(((ViewGroup)layout.getParent()).getId(), fr, false);
+            }, ValidateUtils.BUTTON_ANIMATION_DELAY);
         }
 
     }

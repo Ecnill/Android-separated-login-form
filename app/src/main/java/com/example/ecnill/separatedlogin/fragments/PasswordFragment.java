@@ -28,7 +28,7 @@ public final class PasswordFragment extends BaseLoginFragment {
 
     @Override
     protected void setInputFormProperties(View view) {
-        TextInputLayout textInputLayout = (TextInputLayout)view.findViewById(R.id.input_layout_login_form);
+        TextInputLayout textInputLayout = ButterKnife.findById(view, R.id.input_layout_login_form);
         textInputLayout.setHint(getResources().getString(R.string.settings_password));
         EditText editText = ButterKnife.findById(view, R.id.edit_text_login_form);
         editText.setInputType(InputType.TYPE_CLASS_TEXT | InputType.TYPE_TEXT_VARIATION_PASSWORD);

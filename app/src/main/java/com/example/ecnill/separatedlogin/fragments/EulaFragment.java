@@ -50,35 +50,25 @@ public final class EulaFragment extends Fragment implements ViewTreeObserver.OnG
         next.setEnabled(false);
 
         final CheckBox check = ButterKnife.findById(getActivity(), R.id.checkbox);
-        check.setOnClickListener(new View.OnClickListener() {
-            @Override public void onClick(View v) {
-                if (check.isChecked()) {
-                    next.setClickable(true);
-                }
-
-                SharedPreferences settings = getActivity().getSharedPreferences(ValidateUtils.EULA, 0);
-                SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean(ValidateUtils.EULA, true);
-                editor.apply();
-
-                final Fragment fr = new LoginFragment();
-                final FragmentChangeListener fc = (FragmentChangeListener)getActivity();
-
-                next.setEnabled(true);
-                next.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        handler.postDelayed(new Runnable() {
-                            @Override
-                            public void run() {
-                                fc.replaceFragment(R.id.content_main, fr, false);
-                            }
-                        }, ValidateUtils.BUTTON_ANIMATION_DELAY);
-                    }
-                });
+        check.setOnClickListener(v -> {
+            if (check.isChecked()) {
+                next.setClickable(true);
             }
+
+            SharedPreferences settings = getActivity().getSharedPreferences(ValidateUtils.EULA, 0);
+            SharedPreferences.Editor editor = settings.edit();
+            editor.putBoolean(ValidateUtils.EULA, true);
+            editor.apply();
+
+            final Fragment fr = new LoginFragment();
+            final FragmentChangeListener fc = (FragmentChangeListener)getActivity();
+
+            next.setEnabled(true);
+            next.setOnClickListener(v1 -> handler.postDelayed(
+                            () -> fc.replaceFragment(R.id.content_main, fr, false), ValidateUtils.BUTTON_ANIMATION_DELAY));
         });
 
         layout.getViewTreeObserver().removeOnGlobalLayoutListener(this);
     }
+
 }

@@ -28,7 +28,7 @@ public final class MainProgramFragment extends Fragment{
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(TAG, "onCreate");
+        Log.i(TAG, "onCreate");
     }
 
     @Override
