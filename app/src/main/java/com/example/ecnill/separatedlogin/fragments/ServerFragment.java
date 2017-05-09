@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.utils.Utils;
+import com.example.ecnill.separatedlogin.utils.ValidateUtils;
 
 import butterknife.ButterKnife;
 
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by ecnill on 12/10/16.
  */
 
-public class ServerFragment extends BaseLoginFragment {
+public final class ServerFragment extends BaseLoginFragment {
 
     private static String TAG = ServerFragment.class.getSimpleName();
     private String SERVER = "server";
@@ -55,7 +55,7 @@ public class ServerFragment extends BaseLoginFragment {
 
             @Override
             protected boolean isValid(String value) {
-                return Utils.validate(value, Utils.SERVER_PATTERN);
+                return ValidateUtils.validate(value, ValidateUtils.SERVER_PATTERN);
             }
 
             @Override
@@ -65,7 +65,7 @@ public class ServerFragment extends BaseLoginFragment {
 
             @Override
             protected boolean isCorrect(String value) {
-                return Utils.isServerAddressCorrect(value);
+                return ValidateUtils.isServerAddressCorrect(value);
             }
 
             @Override

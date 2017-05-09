@@ -9,7 +9,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.utils.Utils;
+import com.example.ecnill.separatedlogin.utils.ValidateUtils;
 
 import butterknife.ButterKnife;
 
@@ -17,7 +17,7 @@ import butterknife.ButterKnife;
  * Created by ecnill on 12/10/16.
  */
 
-public class PasswordFragment extends BaseLoginFragment {
+public final class PasswordFragment extends BaseLoginFragment {
 
     private static String TAG = PasswordFragment.class.getSimpleName();
     private String PASSWORD = "password";
@@ -55,7 +55,7 @@ public class PasswordFragment extends BaseLoginFragment {
 
             @Override
             protected boolean isValid(String value) {
-                return Utils.validate(value, Utils.PASSWORD_PATTERN);
+                return ValidateUtils.validate(value, ValidateUtils.PASSWORD_PATTERN);
             }
 
             @Override
@@ -65,7 +65,7 @@ public class PasswordFragment extends BaseLoginFragment {
 
             @Override
             protected boolean isCorrect(String value) {
-                return Utils.isPasswordCorrect(value);
+                return ValidateUtils.isPasswordCorrect(value);
             }
 
             @Override

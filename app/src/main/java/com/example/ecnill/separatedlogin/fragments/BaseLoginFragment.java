@@ -18,7 +18,7 @@ import android.widget.EditText;
 
 import com.example.ecnill.separatedlogin.R;
 import com.example.ecnill.separatedlogin.utils.FragmentChangeListener;
-import com.example.ecnill.separatedlogin.utils.Utils;
+import com.example.ecnill.separatedlogin.utils.ValidateUtils;
 
 import butterknife.ButterKnife;
 
@@ -91,7 +91,7 @@ public abstract class BaseLoginFragment extends Fragment implements ViewTreeObse
                         return;
                     }
                     fieldWrapper.setErrorEnabled(false);
-                    SharedPreferences settings = activity.getSharedPreferences(Utils.LOGIN_SETTINGS, 0);
+                    SharedPreferences settings = activity.getSharedPreferences(ValidateUtils.LOGIN_SETTINGS, 0);
                     SharedPreferences.Editor editor = settings.edit();
                     editor.putString(editProperty, ((EditText) activity.findViewById(R.id.edit_text_login_form)).getText().toString());
                     editor.apply();
@@ -103,7 +103,7 @@ public abstract class BaseLoginFragment extends Fragment implements ViewTreeObse
                     FragmentChangeListener fc = (FragmentChangeListener)activity;
                     fc.replaceFragment(((ViewGroup)layout.getParent()).getId(), fr, false);
                 }
-            }, Utils.BUTTON_ANIMATION_DELAY);
+            }, ValidateUtils.BUTTON_ANIMATION_DELAY);
 
         }
 

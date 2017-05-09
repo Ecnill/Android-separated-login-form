@@ -12,13 +12,13 @@ import android.widget.TextView;
 
 import com.example.ecnill.separatedlogin.MainActivity;
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.utils.Utils;
+import com.example.ecnill.separatedlogin.utils.ValidateUtils;
 
 /**
  * Created by ecnill on 12/10/16.
  */
 
-public class MainProgramFragment extends Fragment{
+public final class MainProgramFragment extends Fragment{
     private String TAG = MainProgramFragment.class.getSimpleName();
 
     public MainProgramFragment() {
@@ -42,8 +42,8 @@ public class MainProgramFragment extends Fragment{
         MainActivity activity = ((MainActivity) getActivity());
         activity.getSupportActionBar().show();    // turn on ActionBar after login fragment
 
-        SharedPreferences settings = activity.getSharedPreferences(Utils.EULA, 0);
-        final boolean eulaOK = settings.getBoolean(Utils.EULA, false);
+        SharedPreferences settings = activity.getSharedPreferences(ValidateUtils.EULA, 0);
+        final boolean eulaOK = settings.getBoolean(ValidateUtils.EULA, false);
 
         if (!eulaOK) {
             Fragment fr = new EulaFragment();
@@ -57,6 +57,5 @@ public class MainProgramFragment extends Fragment{
         }
         setHasOptionsMenu(true);
     }
-
 
 }

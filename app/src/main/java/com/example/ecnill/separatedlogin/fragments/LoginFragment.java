@@ -9,13 +9,13 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.example.ecnill.separatedlogin.R;
-import com.example.ecnill.separatedlogin.utils.Utils;
+import com.example.ecnill.separatedlogin.utils.ValidateUtils;
 
 /**
  * Created by ecnill on 12/10/16.
  */
 
-public class LoginFragment extends BaseLoginFragment {
+public final class LoginFragment extends BaseLoginFragment {
 
     private static String TAG = "LoginFragment";
     private String USERNAME = "username";
@@ -53,7 +53,7 @@ public class LoginFragment extends BaseLoginFragment {
 
             @Override
             protected boolean isValid(String value) {
-                return Utils.validate(value, Utils.EMAIL_PATTERN);
+                return ValidateUtils.validate(value, ValidateUtils.EMAIL_PATTERN);
             }
 
             @Override
@@ -63,7 +63,7 @@ public class LoginFragment extends BaseLoginFragment {
 
             @Override
             protected boolean isCorrect(String value) {
-                return Utils.isEmailExist(value);
+                return ValidateUtils.isEmailExist(value);
             }
 
             @Override

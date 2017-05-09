@@ -1,6 +1,5 @@
 package com.example.ecnill.separatedlogin.fragments;
 
-import android.app.Activity;
 import android.support.v4.app.Fragment;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -17,7 +16,7 @@ import android.widget.CheckBox;
 import com.example.ecnill.separatedlogin.MainActivity;
 import com.example.ecnill.separatedlogin.R;
 import com.example.ecnill.separatedlogin.utils.FragmentChangeListener;
-import com.example.ecnill.separatedlogin.utils.Utils;
+import com.example.ecnill.separatedlogin.utils.ValidateUtils;
 
 import butterknife.ButterKnife;
 
@@ -25,7 +24,7 @@ import butterknife.ButterKnife;
  * Created by ecnill on 12/10/16.
  */
 
-public class EulaFragment extends Fragment implements ViewTreeObserver.OnGlobalLayoutListener {
+public final class EulaFragment extends Fragment implements ViewTreeObserver.OnGlobalLayoutListener {
 
     private String TAG = EulaFragment.class.getSimpleName();
     private Handler handler = new Handler();
@@ -57,9 +56,9 @@ public class EulaFragment extends Fragment implements ViewTreeObserver.OnGlobalL
                     next.setClickable(true);
                 }
 
-                SharedPreferences settings = getActivity().getSharedPreferences(Utils.EULA, 0);
+                SharedPreferences settings = getActivity().getSharedPreferences(ValidateUtils.EULA, 0);
                 SharedPreferences.Editor editor = settings.edit();
-                editor.putBoolean(Utils.EULA, true);
+                editor.putBoolean(ValidateUtils.EULA, true);
                 editor.apply();
 
                 final Fragment fr = new LoginFragment();
@@ -74,7 +73,7 @@ public class EulaFragment extends Fragment implements ViewTreeObserver.OnGlobalL
                             public void run() {
                                 fc.replaceFragment(R.id.content_main, fr, false);
                             }
-                        }, Utils.BUTTON_ANIMATION_DELAY);
+                        }, ValidateUtils.BUTTON_ANIMATION_DELAY);
                     }
                 });
             }
